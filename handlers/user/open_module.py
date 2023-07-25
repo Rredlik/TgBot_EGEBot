@@ -12,9 +12,10 @@ async def __openModule(msg: Message):
     module_id, name, description, link = await get_one(name)
     markup = InlineKeyboardMarkup().add(InlineKeyboardButton('Ссылка на курс', url=link))
     await msg.bot.send_message(chat_id=msg.from_user.id,
-                         text=description,
-                        reply_markup=markup
-                              )
+                               text=f'{name}\n\n'
+                                    f'{description}',
+                               reply_markup=markup)
+
 
 def register_openModule_handlers(dp: Dispatcher) -> None:
     dp.register_message_handler(__openModule, lambda msg: msg.text.startswith('Модуль'))

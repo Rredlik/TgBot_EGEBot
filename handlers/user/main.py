@@ -10,8 +10,7 @@ from handlers.user.user_help import _register_help_handlers
 
 async def __askTp(msg: Message):
     await msg.bot.send_message(chat_id=msg.from_user.id,
-                               text='Если у вас возникли вопросы или что-то не работает пишите: @skidikis'
-                               )
+                               text='Если у вас возникли вопросы или что-то не работает пишите: @skidikis')
 
 
 def register_users_handlers(dp: Dispatcher) -> None:

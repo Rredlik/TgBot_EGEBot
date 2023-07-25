@@ -10,11 +10,11 @@ from config import connectToDB
 from handlers.msg_text import MAIN_MENU_TEXT
 
 
-async def register_jobs(dp):
-    scheduler = AsyncIOScheduler()
-    scheduler.add_job(checkUserStates, 'interval', hours=2, args=[dp])
-    # scheduler.add_job(statisticTodayUsers, 'cron', hour='10', args=[dp])
-    scheduler.start()
+# async def register_jobs(dp):
+#     scheduler = AsyncIOScheduler()
+#     scheduler.add_job(checkUserStates, 'interval', hours=2, args=[dp])
+#     # scheduler.add_job(statisticTodayUsers, 'cron', hour='10', args=[dp])
+#     scheduler.start()
 
 
 async def checkUserStates(dp: Dispatcher):

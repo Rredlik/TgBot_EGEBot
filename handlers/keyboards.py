@@ -1,7 +1,6 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
 from database.methods import lesson_module
-from handlers.msg_text import BTN_CLOSE
 
 
 async def check_sub():
