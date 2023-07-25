@@ -16,22 +16,24 @@ async def __start(message: Message):
     user_id = message.from_user.id
     # first_name = message.from_user.first_name
     # print(user_id)
-    value = await is_reg(user_id=user_id)
+    is_reg = await is_registered(user_id=user_id)
     # print(f'value: {value}')
     msg_txt = await MAIN_MENU_TEXT()
 
-    if value == 'Register':
+    if is_reg:
+        await message.answer("Приветствую! Я - бот канала Саши Зиятдинова.\n\n"
+                             "Мы предоставляем бесплатный доступ к урокам по "
+                             "программированию на Python за подписку на канал!\n\n",
+                             reply_markup=await kb_main())
+    else:
         await message.answer("Приветствую! Я - бот канала Саши Зиятдинова.\n\n"
                              "Мы предоставляем бесплатный доступ к урокам по "
                              "программированию на Python за подписку на канал!\n\n"
                              f"Подпишись на наш канал {CHANNEL_LINK} и нажимай на кнопку «Подписка есть»",
                              reply_markup=await check_sub())
 
-    await message.answer(text=msg_txt,
-                         reply_markup=await kb_main())
 
-
-async def is_reg(user_id):
+async def is_registered(user_id):
     async with connectToDB() as db:
         try:
             command = await db.execute(
@@ -43,9 +45,9 @@ async def is_reg(user_id):
 
             if values is None:
                 await create_new_user(user_id)
-                return 'Register'
+                return False
             else:
-                return values
+                return True
         except Exception as er:
             logger.error(f"{er}")
         finally:
