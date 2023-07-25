@@ -1,10 +1,8 @@
 from aiogram import Dispatcher
-from aiogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import CallbackQuery
 
 from filters.main import IsSubscriber
 from handlers.keyboards import sub_succeed_cont, check_sub_second, to_instruction, kb_main
-from handlers.user.register import _register_register_handlers
-from handlers.user.user_help import _register_help_handlers
 
 
 async def __sub_unsucceed(query: CallbackQuery):
@@ -23,7 +21,8 @@ async def __sub_succeed(query: CallbackQuery):
 
 
 async def __mainMenu(query: CallbackQuery):
-    await query.bot.send_photo(query.from_user.id, photo='media/start_photo.jpg',
+    await query.bot.send_photo(query.from_user.id, photo='AgACAgIAAxkBAAIMI2S_q3S_Q29ZX_1911gz9NWOw'
+                                                         'XuiAAIfzjEbyZL4SRtXboqJqfD6AQADAgADdwADLwQ',
                                caption='краткое описание всех модулей (т.е. текстовый блок)',
                                reply_markup=await to_instruction())
 
@@ -34,6 +33,9 @@ async def __instruction(query: CallbackQuery):
                                  '«Модуль 1»\n\n'
                                  'По мере выхода уроков мы будем добавлять новые кнопки и сообщать тебе об этом',
                                  reply_markup=await kb_main())
+    await query.bot.send_message(query.from_user.id,
+                                 'Если кнопки скрыты - нажми на иконку 🎛 в правом нижнем углу рядом с микрофоном',
+                                 reply_markup=await kb_main())
 
 
 def _register_usersReg_handlers(dp: Dispatcher) -> None:
@@ -43,4 +45,4 @@ def _register_usersReg_handlers(dp: Dispatcher) -> None:
 
     dp.register_callback_query_handler(__mainMenu, lambda c: c.data == 'sub_succeed_cont')
 
-    dp.register_callback_query_handler(__mainMenu, lambda c: c.data == 'sub_succeed_cont')
+    dp.register_callback_query_handler(__instruction, lambda c: c.data == 'instruction')

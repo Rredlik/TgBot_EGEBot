@@ -1,5 +1,6 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
+from database.methods import lesson_module
 from handlers.msg_text import BTN_CLOSE
 
 
@@ -12,7 +13,7 @@ async def check_sub():
 async def check_sub_second():
     markup = InlineKeyboardMarkup().add(InlineKeyboardButton('✅ Проверить подписку',
                                                              callback_data='check_sub_second'))\
-        .add(InlineKeyboardButton('✅ Тех. поддержка', callback_data='@skidikis'))
+        .add(InlineKeyboardButton('📚 Тех. поддержка', url='t.me/skidikis'))
     return markup
 
 
@@ -29,8 +30,13 @@ async def sub_succeed_cont():
 
 
 async def kb_main():
-    markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True) \
-        .row(KeyboardButton('✅ Модуль')) \
-        .row(KeyboardButton('📚 Тех. поддержка'))
+    modules = await lesson_module.get_all()
+    print(modules)
+    markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
 
+    for module in range(0, len(modules)):
+        markup.row(KeyboardButton(
+            text=f"{modules[module][1]}"
+        ))
+    markup.row(KeyboardButton('📚 Тех. поддержка'))
     return markup

@@ -16,7 +16,6 @@ async def __start(message: Message):
     is_reg = await is_registered(user_id=user_id)
     msg_txt = await MAIN_MENU_TEXT()
     sub_status = await message.bot.get_chat_member(chat_id=CHANNEL_ID[0], user_id=message.from_user.id)
-    current_stage = await user_stage.get(user_id)
 
     if is_reg:
 
@@ -31,7 +30,7 @@ async def __start(message: Message):
         await message.answer(msg_txt +
                              f"Подпишись на наш канал {CHANNEL_LINK} и нажимай на кнопку «Подписка есть»",
                              reply_markup=await check_sub())
-        await user_stage.next(user_id)
+
 
 
 async def is_registered(user_id):
