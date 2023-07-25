@@ -17,6 +17,8 @@ class IsSubscriber(BoundFilter):
                 return True
 
 
+
+
 class IsAdmin(BoundFilter):
     async def check(self, message: Message):
         return True if message.from_user.id in ADMIN_IDS else False
@@ -27,10 +29,16 @@ class NotAdmin(BoundFilter):
         return False if message.from_user.id in ADMIN_IDS else True
 
 
+class IsAdmin(BoundFilter):
+    async def check(self, message: Message):
+        return True if message.from_user.id in ADMIN_IDS else False
+
+
 async def register_all_filters(dp: Dispatcher):
     filters = (
         NotAdmin,
-        IsAdmin
+        IsAdmin,
+        IsSubscriber
     )
     for filter in filters:
         dp.bind_filter(filter)

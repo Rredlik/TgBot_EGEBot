@@ -13,15 +13,6 @@ from handlers.stuff_methods import send_mess_or_cb, deletePreviousMessage
 from utils.states import ADPosting
 
 
-# region Menu
-
-# async def __admin_help_menu(msg: Message, state: FSMContext):
-#     markup = InlineKeyboardMarkup() \
-#         .add(InlineKeyboardButton('Меню админа', callback_data='admin_menu')) \
-#         .add(InlineKeyboardButton(BTN_CLOSE, callback_data='close_menu_'))
-#     await send_mess_or_cb(msg=msg, message_text="Меню админа",
-#                           markup=markup, state=state)
-
 
 async def __admin_menu(msg: Message, state: FSMContext):
     userId = msg.from_user.id
@@ -132,23 +123,13 @@ async def __analytic(query: CallbackQuery, state: FSMContext) -> None:
     text = (
         'Отчет:\n',
         f'Кол-во пользователей: {len(users_count)}'
-
-        # f'Кол-во сессий: {user_session_count}\n',
-        # f'VIP онлайн: {vip_session_enable_count}',
-        # f'Free онлайн: {free_session_enable_count}',
-        # f'Total онлайн: {session_enable_count}',
     )
     await query.answer('\n'.join(text), show_alert=True, cache_time=0)
 
 
 def register_admin_handlers(dp: Dispatcher) -> None:
-    # region Menu
-
     dp.register_message_handler(__admin_menu, IsAdmin(), Text(equals="📚 Инструкция"),
                                 state='*')
-    # dp.register_callback_query_handler(__admin_menu, lambda c: c.data == 'admin_menu',
-    #                                    IsAdmin(), state='*')
-
     # endregion
 
     # region Advertising
