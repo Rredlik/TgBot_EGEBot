@@ -11,18 +11,7 @@ async def check_sub():
 
 async def kb_main():
     markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True) \
-        .row(KeyboardButton('✅ Подобрать заведение'), KeyboardButton('🔀 Случайное заведение')) \
-        .row(KeyboardButton('⭐ Избранные'), KeyboardButton('🏆 ТОП-месяца'), KeyboardButton('📚 Инструкция'))
+        .row(KeyboardButton('✅ МОдуль')) \
+        .row(KeyboardButton('📚 Тех. поддержка'))
 
-    return markup
-
-
-async def openMainKeyboard():
-    markup = InlineKeyboardMarkup().add(InlineKeyboardButton('⌨️ Открыть клавиатуру',
-                                                             callback_data='close_menu_'))
-    return markup
-
-
-async def kb_close():
-    markup = InlineKeyboardMarkup().add(InlineKeyboardButton(BTN_CLOSE, callback_data='close_menu_selected'))
     return markup

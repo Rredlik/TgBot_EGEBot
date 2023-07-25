@@ -6,7 +6,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from loguru import logger
 
 from config import connectToDB
-from handlers.keyboards import openMainKeyboard
+# from handlers.keyboards import openMainKeyboard
 from handlers.msg_text import MAIN_MENU_TEXT
 
 
@@ -39,7 +39,7 @@ async def checkUserStates(dp: Dispatcher):
         try:
             await dp.bot.edit_message_text(chat_id=userId, message_id=message_id,
                                            text=f'{await MAIN_MENU_TEXT()}',
-                                           reply_markup=await openMainKeyboard())
+                                           reply_markup="await openMainKeyboard()")
         except Exception as er:
             logger.error(f'{er}')
         finally:

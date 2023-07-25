@@ -43,6 +43,8 @@ def start_telegram_bot():
     # logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     #                     level=logging.INFO)
     # logger = logging.getLogger(__name__)
-    bot = Bot(token=Env.TOKEN, parse_mode='HTML')
+    # bot = Bot(token=Env.TOKEN, parse_mode='HTML')
+    TOKEN = '5526113848:AAHXJKLH5BEDyogSFUbaupnrE1H2NoehBoI'
+    bot = Bot(token=TOKEN, parse_mode='HTML')
     dp = Dispatcher(bot, storage=MemoryStorage())
     executor.start_polling(dp, skip_updates=True, on_startup=__on_start_up, on_shutdown=__on_shutdown)

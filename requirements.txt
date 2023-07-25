@@ -3,3 +3,4 @@ aiosqlite~=0.17.0
 loguru~=0.6.0
 APScheduler~=3.10.0
 python-dotenv~=1.0.0
+pendulum~=2.1.2

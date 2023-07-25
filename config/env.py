@@ -6,4 +6,4 @@ TOKEN = '5526113848:AAHXJKLH5BEDyogSFUbaupnrE1H2NoehBoI'
 
 class Env(ABC):
     load_dotenv()
-    TOKEN: Final = os.environ.get(TOKEN) ##, 'define me!')
+    TOKEN: Final = os.environ.get('TOKEN', 'define me!')

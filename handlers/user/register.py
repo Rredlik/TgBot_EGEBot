@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from aiogram import Dispatcher
 from aiogram.types import Message
 from loguru import logger
@@ -54,8 +56,8 @@ async def create_new_user(user_id):
     async with connectToDB() as db:
         try:
             await db.execute(
-                "INSERT INTO 'users' (user_id) VALUES (?)",
-                (user_id,)
+                "INSERT INTO 'users' (user_id, reg_date) VALUES (?, ?)",
+                (user_id, datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
             )
             logger.info(f"New user registered: {user_id}")
             await db.commit()
