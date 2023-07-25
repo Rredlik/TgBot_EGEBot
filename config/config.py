@@ -1,7 +1,7 @@
 # import aiohttp
 import aiosqlite
 import pendulum as pendulum
-
+# 5526113848:AAHXJKLH5BEDyogSFUbaupnrE1H2NoehBoI
 ADMIN_IDS = [351931465]  # 351931465
 CHANNEL_ID = [-1001665320015]  # ачо а ничо
 CHANNEL_LINK = "https://t.me/rredlik"
