@@ -3,28 +3,23 @@ from aiogram import Bot
 from aiogram.dispatcher import FSMContext
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
 
-import handlers.main
 from DB_update import update_full_description, get_full_description
-from utils.states import RestStates
-from handlers.msg_text import MAIN_MENU_TEXT
-from handlers.admin.database import create_new_rest, delete_new_rest, add_type_new_rest
-from handlers.keyboards import kb_main
 
 
 #################################### STEP 1
 
 
 # first btn
-async def stage_name(query: CallbackQuery):
-    bot: Bot = query.bot
-    print("Stage 1 start")
-    await RestStates.STATE_1_NAME.set()
-
-    user_id = query.from_user.id
-    await bot.send_message(chat_id=user_id,
-                           text="Введи название нового заведения без лишних символов и переносов",
-                           reply_markup=await new_rest_state_0())
-    print('Stage 1 complete')
+# async def stage_name(query: CallbackQuery):
+#     bot: Bot = query.bot
+#     print("Stage 1 start")
+#     await RestStates.STATE_1_NAME.set()
+#
+#     user_id = query.from_user.id
+#     await bot.send_message(chat_id=user_id,
+#                            text="Введи название нового заведения без лишних символов и переносов",
+#                            reply_markup=await new_rest_state_0())
+#     print('Stage 1 complete')
 
 
 async def new_rest_state_0():
@@ -34,28 +29,28 @@ async def new_rest_state_0():
 
 
 #################################### STEP 2
-async def stage_type(message: Message, state: FSMContext):
-    print("Stage 2")
-    user_id = message.from_user.id
-    rest_name = message.text
-    rest_id = await create_new_rest(rest_name)
-    await update_full_description(False, rest_id)
-
-    name, full_description, image = await get_full_description(rest_id)
-
-    async with state.proxy() as data:
-        data['name'] = rest_id
-
-    await RestStates.next()
-
-    await bot.send_message(chat_id=user_id,
-                                              text=f"Предпросмотр карточки заведения (id: {rest_id}):\n"
-                                   f"{full_description}\n\n"
-                                   "Далее, введите тип нового заведения",
-                                              parse_mode='html',
-                                              reply_markup=await new_rest_state_kb(rest_id))
-
-    print("Stage 2 complete")
+# async def stage_type(message: Message, state: FSMContext):
+#     print("Stage 2")
+#     user_id = message.from_user.id
+#     rest_name = message.text
+#     rest_id = await create_new_rest(rest_name)
+#     await update_full_description(False, rest_id)
+#
+#     name, full_description, image = await get_full_description(rest_id)
+#
+#     async with state.proxy() as data:
+#         data['name'] = rest_id
+#
+#     await RestStates.next()
+#
+#     await bot.send_message(chat_id=user_id,
+#                                               text=f"Предпросмотр карточки заведения (id: {rest_id}):\n"
+#                                    f"{full_description}\n\n"
+#                                    "Далее, введите тип нового заведения",
+#                                               parse_mode='html',
+#                                               reply_markup=await new_rest_state_kb(rest_id))
+#
+#     print("Stage 2 complete")
 
 
 

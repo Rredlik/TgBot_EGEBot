@@ -31,8 +31,8 @@ async def __mainMenu(query: CallbackQuery):
     await query.bot.send_photo(query.from_user.id, photo='AgACAgIAAxkBAAIMI2S_q3S_Q29ZX_1911gz9NWOw'
                                                          'XuiAAIfzjEbyZL4SRtXboqJqfD6AQADAgADdwADLwQ')
     await query.bot.send_document(query.from_user.id,
-                                  ('Учебный план.pdf', 'AgACAgIAAxkBAAIMI2S_q3S_Q29ZX_1911gz9NWOw'
-                                                             'XuiAAIfzjEbyZL4SRtXboqJqfD6AQADAgADdwADLwQ'))
+                                  ('Учебный план.pdf',
+                                   'AAMCAgADGQEAAgxmZMFoUbEU9H88hi1y826cI3LxLZwAAmUyAAKe6AFK2DkdhprtDwEBAAdtAAMvBA'))
     await query.bot.send_message(query.from_user.id,
                                  '🚀Для того, чтобы приступить к обучению, перейди в главное меню и нажми кнопку '
                                  '«Модуль 1»\n\n '

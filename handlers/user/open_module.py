@@ -1,10 +1,7 @@
 from aiogram import Dispatcher
-from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import Message
 
 from database.methods.lesson_module import get_one
-from handlers.user.check_sub import _register_usersReg_handlers
-from handlers.user.register import _register_register_handlers
-from handlers.user.user_help import _register_help_handlers
 
 
 async def __openModule(msg: Message):

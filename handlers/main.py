@@ -1,3 +1,5 @@
+import logging
+
 from aiogram import Dispatcher, Bot
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.utils import executor
@@ -40,9 +42,9 @@ async def __on_shutdown(dp):
 
 
 def start_telegram_bot():
-    # logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    #                     level=logging.INFO)
-    # logger = logging.getLogger(__name__)
+    logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+                        level=logging.DEBUG)
+    logger = logging.getLogger(__name__)
     # bot = Bot(token=Env.TOKEN, parse_mode='HTML')
     TOKEN = '5526113848:AAHXJKLH5BEDyogSFUbaupnrE1H2NoehBoI'
     bot = Bot(token=TOKEN, parse_mode='HTML')
