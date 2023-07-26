@@ -1,10 +1,10 @@
 from aiogram import Dispatcher
 from aiogram.types import CallbackQuery
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from config import CHANNEL_LINK
 from filters.main import IsSubscriber
-from handlers.keyboards import sub_succeed_cont, check_sub_second, to_instruction, kb_main
+from handlers.keyboards import kb_main
 
 
 async def __sub_unsucceed(query: CallbackQuery):

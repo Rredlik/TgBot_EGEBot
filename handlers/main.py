@@ -10,7 +10,7 @@ from handlers.admin import register_admin_handlers
 from handlers.keyboards import kb_main
 from handlers.stuff_methods import _register_utils_handlers
 from handlers.user.main import register_users_handlers
-from misc.scheduler_jobs import register_jobs
+# from misc.scheduler_jobs import register_jobs
 
 
 async def register_all_handlers(dp: Dispatcher) -> None:
@@ -27,7 +27,7 @@ async def __on_start_up(dp: Dispatcher):
     # await register_database()
     await register_all_filters(dp)
     await register_all_handlers(dp)
-    await register_jobs(dp)
+    # await register_jobs(dp)
 
     logger.success("Bot started!")
     logger.info(f"Admins list: {ADMIN_IDS}")
