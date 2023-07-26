@@ -14,7 +14,9 @@ from handlers.user.user_help import _register_help_handlers
 async def __start(message: Message):
     user_id = message.from_user.id
     is_reg = await is_registered(user_id=user_id)
-    msg_txt = await MAIN_MENU_TEXT()
+    msg_txt = ("Добро пожаловать! \n"
+               "🤖Я официальный бот канала Alex | Информатика ЕГЭ. Я буду помогать тебе в процессе обучения. \n\n"
+               "🎁За подписку на канал мы дарим доступ к урокам по программированию на Python!\n\n")
     sub_status = await message.bot.get_chat_member(chat_id=CHANNEL_ID[0], user_id=message.from_user.id)
 
     if is_reg:
@@ -24,13 +26,12 @@ async def __start(message: Message):
                                  reply_markup=await kb_main())
         else:
             await message.answer(msg_txt +
-                                 f"Подпишись на наш канал {CHANNEL_LINK} и нажимай на кнопку «Подписка есть»",
+                                 f"📚Чтобы начать обучение, подпишись на наш канал {CHANNEL_LINK}.",
                                  reply_markup=await check_sub())
     else:
         await message.answer(msg_txt +
-                             f"Подпишись на наш канал {CHANNEL_LINK} и нажимай на кнопку «Подписка есть»",
+                             f"📚Чтобы начать обучение, подпишись на наш канал {CHANNEL_LINK}.",
                              reply_markup=await check_sub())
-
 
 
 async def is_registered(user_id):
@@ -71,4 +72,3 @@ async def create_new_user(user_id):
 
 def _register_register_handlers(dp: Dispatcher) -> None:
     dp.register_message_handler(__start, commands=["start"], state='*')
-
