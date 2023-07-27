@@ -1,4 +1,7 @@
+import asyncio
+
 from aiogram import Dispatcher
+from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -29,12 +32,14 @@ async def __sub_succeed(query: CallbackQuery):
                                  reply_markup=markup)
 
 
-async def __mainMenu(query: CallbackQuery):
+async def __mainMenu(query: CallbackQuery, state: FSMContext):
+    await state.reset_state()
     await query.bot.send_photo(query.from_user.id, photo='AgACAgIAAxkBAAIMI2S_q3S_Q29ZX_1911gz9NWOw'
                                                          'XuiAAIfzjEbyZL4SRtXboqJqfD6AQADAgADdwADLwQ')
-    await query.bot.send_document(query.from_user.id,
-                                  ('Учебный план.pdf',
-                                   'AAMCAgADGQEAAgxmZMFoUbEU9H88hi1y826cI3LxLZwAAmUyAAKe6AFK2DkdhprtDwEBAAdtAAMvBA'))
+    await query.bot.send_document(chat_id=query.from_user.id,
+                                  document=('Учебный план.pdf',
+                                            'BQACAgIAAxkBAAINJGTCCtId_eLNhYYEBnR99LlQSpOmAAJSMwACQM4RSmBho8S8bvGkLwQ'))
+    await asyncio.sleep(0.5)
     await query.bot.send_message(query.from_user.id,
                                  '🚀Для того, чтобы приступить к обучению, перейди в главное меню и нажми кнопку '
                                  '«Модуль 1»\n\n '
