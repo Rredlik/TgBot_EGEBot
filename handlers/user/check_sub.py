@@ -5,6 +5,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from config import CHANNEL_LINK
 from filters.main import IsSubscriber
 from handlers.keyboards import kb_main
+from utils.states import Register
 
 
 async def __sub_unsucceed(query: CallbackQuery):
@@ -20,6 +21,7 @@ async def __sub_unsucceed(query: CallbackQuery):
 
 async def __sub_succeed(query: CallbackQuery):
     markup = InlineKeyboardMarkup().add(InlineKeyboardButton('Начинаем!', callback_data='sub_succeed_cont'))
+    await Register.SucceedSub.set()
     await query.bot.send_message(query.from_user.id,
                                  '👍 Отлично! Вижу твою подписку.\n\n'
                                  '🚀 Не теряй времени - давай начнем это увлекательное путешествие '
@@ -50,9 +52,10 @@ async def __mainMenu(query: CallbackQuery):
 
 def _register_usersReg_handlers(dp: Dispatcher) -> None:
     dp.register_callback_query_handler(__sub_succeed, lambda c: c.data == 'check_sub' or c.data == 'check_sub_second',
-                                       IsSubscriber())
-    dp.register_callback_query_handler(__sub_unsucceed, lambda c: c.data == 'check_sub' or c.data == 'check_sub_second')
+                                       IsSubscriber(), state=Register.StartState)
+    dp.register_callback_query_handler(__sub_unsucceed, lambda c: c.data == 'check_sub' or c.data == 'check_sub_second',
+                                       state=Register.StartState)
 
-    dp.register_callback_query_handler(__mainMenu, lambda c: c.data == 'sub_succeed_cont')
+    dp.register_callback_query_handler(__mainMenu, lambda c: c.data == 'sub_succeed_cont', state=Register.SucceedSub)
 
     # dp.register_callback_query_handler(__instruction, lambda c: c.data == 'instruction')

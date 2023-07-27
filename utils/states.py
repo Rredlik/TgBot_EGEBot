@@ -10,5 +10,4 @@ class ADPosting(StatesGroup):
 
 class Register(StatesGroup):
     StartState: Final = State()
-    CheckSub: Final = State()
     SucceedSub: Final = State()
