@@ -1,14 +1,16 @@
 from datetime import datetime
 
 from aiogram import Dispatcher
+from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, ChatMemberStatus
 from loguru import logger
 
 from config import connectToDB, CHANNEL_LINK, CHANNEL_ID
 from handlers.keyboards import *
+from utils.states import Register
 
 
-async def __start(message: Message):
+async def __start(message: Message, state: FSMContext):
     user_id = message.from_user.id
     is_reg = await is_registered(user_id=user_id)
     msg_txt = ("Добро пожаловать! \n"
@@ -22,10 +24,14 @@ async def __start(message: Message):
             await message.answer(msg_txt,
                                  reply_markup=await kb_main())
         else:
+
+            await Register.StartState.set()
             await message.answer(msg_txt +
                                  f"📚Чтобы начать обучение, подпишись на наш канал {CHANNEL_LINK}.",
                                  reply_markup=await check_sub())
     else:
+
+        await Register.StartState.set()
         await message.answer(msg_txt +
                              f"📚Чтобы начать обучение, подпишись на наш канал {CHANNEL_LINK}.",
                              reply_markup=await check_sub())
@@ -69,3 +75,5 @@ async def create_new_user(user_id):
 
 def _register_register_handlers(dp: Dispatcher) -> None:
     dp.register_message_handler(__start, commands=["start"], state='*')
+
+
