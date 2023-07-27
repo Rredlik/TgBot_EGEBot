@@ -60,8 +60,9 @@ def _register_usersReg_handlers(dp: Dispatcher) -> None:
     dp.register_callback_query_handler(__sub_succeed, lambda c: c.data == 'check_sub' or c.data == 'check_sub_second',
                                        IsSubscriber(), state=Register.StartState)
     dp.register_callback_query_handler(__sub_unsucceed, lambda c: c.data == 'check_sub' or c.data == 'check_sub_second',
-                                       state=Register.StartState)
+                                       IsSubscriber(), state=Register.StartState)
 
-    dp.register_callback_query_handler(__mainMenu, lambda c: c.data == 'sub_succeed_cont', state=Register.SucceedSub)
+    dp.register_callback_query_handler(__mainMenu, lambda c: c.data == 'sub_succeed_cont', IsSubscriber(),
+                                       state=Register.SucceedSub)
 
     # dp.register_callback_query_handler(__instruction, lambda c: c.data == 'instruction')
