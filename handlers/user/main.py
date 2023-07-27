@@ -14,7 +14,7 @@ async def __askTp(msg: Message):
 
 
 def register_users_handlers(dp: Dispatcher) -> None:
-    dp.register_message_handler(__askTp, Text(equals="📚 Тех. поддержка"), state='*')
+    dp.register_message_handler(__askTp, Text(equals='👩🏼‍💻 Тех. поддержка'), state='*')
 
     _register_usersReg_handlers(dp)
     _register_register_handlers(dp)
