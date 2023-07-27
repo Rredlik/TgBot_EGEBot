@@ -6,3 +6,9 @@ class ADPosting(StatesGroup):
     WriteText: Final = State()
     CheckPost: Final = State()
     SendPost: Final = State()
+
+
+class Register(StatesGroup):
+    StartState: Final = State()
+    CheckSub: Final = State()
+    SucceedSub: Final = State()
