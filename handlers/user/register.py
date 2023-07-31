@@ -6,6 +6,7 @@ from aiogram.types import Message, ChatMemberStatus
 from loguru import logger
 
 from config import connectToDB, CHANNEL_LINK, CHANNEL_ID
+from database.methods import user_stage
 from handlers.keyboards import *
 from utils.states import Register
 
@@ -21,6 +22,7 @@ async def __start(message: Message, state: FSMContext):
     if is_reg:
 
         if not sub_status.status == ChatMemberStatus.LEFT:
+            await user_stage.next(user_id)  # ставиться stage = 1
             await message.answer(msg_txt,
                                  reply_markup=await kb_main())
         else:
@@ -75,5 +77,3 @@ async def create_new_user(user_id):
 
 def _register_register_handlers(dp: Dispatcher) -> None:
     dp.register_message_handler(__start, commands=["start"], state='*')
-
-

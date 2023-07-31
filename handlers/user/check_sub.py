@@ -6,6 +6,7 @@ from aiogram.types import CallbackQuery
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from config import CHANNEL_LINK
+from database.methods import user_stage
 from filters.main import IsSubscriber
 from handlers.keyboards import kb_main
 from utils.states import Register
@@ -24,12 +25,22 @@ async def __sub_unsucceed(query: CallbackQuery):
 
 
 async def __sub_succeed(query: CallbackQuery):
-    markup = InlineKeyboardMarkup().add(InlineKeyboardButton('Начинаем!', callback_data='sub_succeed_cont'))
+
     # await Register.SucceedSub.set()
+    userStage = await user_stage.get(query.from_user.id)
+    if userStage == 1:
+        msgText = ('👍 Отлично! Вижу твою подписку.\n\n'
+                   '🚀 Не теряй времени - давай начнем это увлекательное путешествие '
+                   'в мир Python вместе!')
+        btnText = "Продолжаем!"
+    else:
+        msgText = ('👍 Отлично! Вижу твою подписку.\n\n'
+                   '🚀 Не теряй времени - давай продолжим это увлекательное путешествие '
+                   'в мир Python вместе!')
+        btnText = "Начинаем!"
+    markup = InlineKeyboardMarkup().add(InlineKeyboardButton(btnText, callback_data='sub_succeed_cont'))
     await query.bot.send_message(query.from_user.id,
-                                 '👍 Отлично! Вижу твою подписку.\n\n'
-                                 '🚀 Не теряй времени - давай начнем это увлекательное путешествие '
-                                 'в мир Python вместе!',
+                                 msgText,
                                  reply_markup=markup)
 
 
