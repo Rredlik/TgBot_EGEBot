@@ -22,7 +22,7 @@ async def __start(message: Message, state: FSMContext):
     if is_reg:
 
         if not sub_status.status == ChatMemberStatus.LEFT:
-            await user_stage.next(user_id)  # ставиться stage = 1
+              # ставиться stage = 1
             await message.answer(msg_txt,
                                  reply_markup=await kb_main())
         else:
@@ -32,7 +32,7 @@ async def __start(message: Message, state: FSMContext):
                                  f"📚Чтобы начать обучение, подпишись на наш канал {CHANNEL_LINK}.",
                                  reply_markup=await check_sub())
     else:
-
+        await user_stage.next(user_id)
         await Register.StartState.set()
         await message.answer(msg_txt +
                              f"📚Чтобы начать обучение, подпишись на наш канал {CHANNEL_LINK}.",
