@@ -47,6 +47,7 @@ async def __sub_succeed(query: CallbackQuery):
 
 async def __mainMenu(query: CallbackQuery, state: FSMContext):
     await state.reset_state()
+    await user_stage.next(query.from_user.id)
     await query.bot.send_photo(query.from_user.id, photo='AgACAgIAAxkBAAIMI2S_q3S_Q29ZX_1911gz9NWOw'
                                                          'XuiAAIfzjEbyZL4SRtXboqJqfD6AQADAgADdwADLwQ')
     await query.bot.send_document(chat_id=query.from_user.id,

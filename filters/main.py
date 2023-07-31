@@ -25,7 +25,7 @@ class IsSubscriber(BoundFilter):
                 stageWord = 'начать'
             else:
                 stageWord = 'продолжить'
-                
+
             markup = InlineKeyboardMarkup() \
                 .add(InlineKeyboardButton('✅ Проверить подписку', callback_data='check_sub_second')) \
                 .add(InlineKeyboardButton('👩🏼‍💻 Тех. поддержка', url='t.me/skidikis'))
