@@ -49,4 +49,4 @@ def start_telegram_bot():
     TOKEN = '5526113848:AAHXJKLH5BEDyogSFUbaupnrE1H2NoehBoI'
     bot = Bot(token=TOKEN, parse_mode='HTML')
     dp = Dispatcher(bot, storage=MemoryStorage())
-    executor.start_polling(dp, on_startup=__on_start_up, on_shutdown=__on_shutdown)
+    executor.start_polling(dp,  skip_updates=True, on_startup=__on_start_up, on_shutdown=__on_shutdown)
