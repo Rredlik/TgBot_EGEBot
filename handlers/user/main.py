@@ -2,6 +2,7 @@ from aiogram import Dispatcher
 from aiogram.dispatcher.filters import Text
 from aiogram.types import Message
 
+from config import ADMIN_LINK
 from filters.main import IsSubscriber
 from handlers.user.check_sub import _register_usersReg_handlers
 from handlers.user.open_module import register_openModule_handlers
@@ -18,5 +19,4 @@ def register_users_handlers(dp: Dispatcher) -> None:
 
     _register_usersReg_handlers(dp)
     _register_register_handlers(dp)
-    _register_help_handlers(dp)
     register_openModule_handlers(dp)
