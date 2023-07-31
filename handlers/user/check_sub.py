@@ -38,6 +38,7 @@ async def __sub_succeed(query: CallbackQuery):
                    '🚀 Не теряй времени - давай продолжим это увлекательное путешествие '
                    'в мир Python вместе!')
         btnText = "Продолжаем!"
+    await Register.SucceedSub.set()
     markup = InlineKeyboardMarkup().add(InlineKeyboardButton(btnText, callback_data='sub_succeed_cont'))
     await query.bot.send_message(query.from_user.id,
                                  msgText,

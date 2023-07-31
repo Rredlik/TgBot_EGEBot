@@ -4,6 +4,7 @@ from aiogram.dispatcher.handler import CancelHandler
 from aiogram.types import Message, ChatMemberStatus, InlineKeyboardMarkup, InlineKeyboardButton
 
 from config import *
+from database.methods import user_stage
 
 
 class IsSubscriber(BoundFilter):
@@ -19,12 +20,18 @@ class IsSubscriber(BoundFilter):
         if subscribed == len(CHANNEL_ID):
             return True
         else:
+            userStage = await user_stage.get(message.from_user.id)
+            if userStage == 1:
+                stageWord = 'начать'
+            else:
+                stageWord = 'продолжить'
+                
             markup = InlineKeyboardMarkup() \
                 .add(InlineKeyboardButton('✅ Проверить подписку', callback_data='check_sub_second')) \
                 .add(InlineKeyboardButton('👩🏼‍💻 Тех. поддержка', url='t.me/skidikis'))
             await bot.send_message(message.from_user.id,
                                    'К сожалению, не вижу твоей подписки. Давай попробуем ещё раз.\n\n'
-                                   f'📚Чтобы начать обучение, подпишись на наш канал {CHANNEL_LINK}\n\n'
+                                   f'📚Чтобы {stageWord} обучение, подпишись на наш канал {CHANNEL_LINK}\n\n'
                                    'P.s. Если у тебя возникла проблема с подпиской - напиши в тех. поддержку',
                                    reply_markup=markup)
             raise CancelHandler()
