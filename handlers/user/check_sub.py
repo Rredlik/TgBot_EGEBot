@@ -24,26 +24,29 @@ async def __sub_unsucceed(query: CallbackQuery):
     pass
 
 
-async def __sub_succeed(query: CallbackQuery):
+async def __sub_succeed(query: CallbackQuery, state: FSMContext):
     user_id = query.from_user.id
     # await Register.SucceedSub.set()
     userStage = await user_stage.get(user_id)
     if userStage == 1:
+        await Register.SucceedSub.set()
+        await user_stage.next(user_id)
+
         msgText = ('👍 Отлично! Вижу твою подписку.\n\n'
                    '🚀 Не теряй времени - давай начнем это увлекательное путешествие '
                    'в мир Python вместе!')
         btnText = "Начинаем!"
-        await user_stage.next(user_id)
+        markup = InlineKeyboardMarkup().add(InlineKeyboardButton(btnText, callback_data='sub_succeed_cont'))
+        await query.bot.send_message(user_id,
+                                     msgText,
+                                     reply_markup=markup)
     else:
         msgText = ('👍 Отлично! Вижу твою подписку.\n\n'
                    '🚀 Не теряй времени - давай продолжим это увлекательное путешествие '
                    'в мир Python вместе!')
-        btnText = "Продолжаем!"
-    await Register.SucceedSub.set()
-    markup = InlineKeyboardMarkup().add(InlineKeyboardButton(btnText, callback_data='sub_succeed_cont'))
-    await query.bot.send_message(user_id,
-                                 msgText,
-                                 reply_markup=markup)
+        await query.bot.send_message(user_id,
+                                     msgText)
+        await __mainMenu(query, state)
 
 
 async def __mainMenu(query: CallbackQuery, state: FSMContext):
