@@ -25,14 +25,15 @@ async def __sub_unsucceed(query: CallbackQuery):
 
 
 async def __sub_succeed(query: CallbackQuery):
-
+    user_id = query.from_user.id
     # await Register.SucceedSub.set()
-    userStage = await user_stage.get(query.from_user.id)
+    userStage = await user_stage.get(user_id)
     if userStage == 1:
         msgText = ('👍 Отлично! Вижу твою подписку.\n\n'
                    '🚀 Не теряй времени - давай начнем это увлекательное путешествие '
                    'в мир Python вместе!')
         btnText = "Начинаем!"
+        await user_stage.next(user_id)
     else:
         msgText = ('👍 Отлично! Вижу твою подписку.\n\n'
                    '🚀 Не теряй времени - давай продолжим это увлекательное путешествие '
@@ -40,7 +41,7 @@ async def __sub_succeed(query: CallbackQuery):
         btnText = "Продолжаем!"
     await Register.SucceedSub.set()
     markup = InlineKeyboardMarkup().add(InlineKeyboardButton(btnText, callback_data='sub_succeed_cont'))
-    await query.bot.send_message(query.from_user.id,
+    await query.bot.send_message(user_id,
                                  msgText,
                                  reply_markup=markup)
 
