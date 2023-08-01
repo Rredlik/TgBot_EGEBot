@@ -7,6 +7,7 @@ from loguru import logger
 
 from config import ADMIN_IDS
 from config.env import Env
+from database.main import create_db
 from filters import register_all_filters
 from handlers.admin import register_admin_handlers
 from handlers.keyboards import kb_main
@@ -27,6 +28,8 @@ async def register_all_handlers(dp: Dispatcher) -> None:
 
 async def __on_start_up(dp: Dispatcher):
     # await register_database()
+    await create_db()
+
     await register_all_filters(dp)
     await register_all_handlers(dp)
     # await register_jobs(dp)

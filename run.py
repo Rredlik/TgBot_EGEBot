@@ -9,6 +9,7 @@ from misc.path import PathManager
 
 
 def main():
+
     log_path = PathManager.get('logs/debug.log')
     logger.configure(patcher=set_datetime)
     logger.add(log_path, format="{extra[datetime]} | {level} | {message}",
@@ -17,5 +18,4 @@ def main():
 
 
 if __name__ == '__main__':
-    asyncio.run(await create_db())
     main()
