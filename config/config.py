@@ -2,6 +2,10 @@
 import aiosqlite
 import pendulum as pendulum
 
+
+PATH_DATABASE = "database/main.db"
+
+
 ADMIN_IDS = [351931465]  # 351931465
 ADMIN_LINK = ['@skidikis']
 
@@ -16,7 +20,7 @@ def set_datetime(record):
 
 
 def connectToDB():
-    connection = aiosqlite.connect('./main.db')
+    connection = aiosqlite.connect(PATH_DATABASE)
     return connection
 
 # async def async_gather_http_get():

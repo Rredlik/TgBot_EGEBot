@@ -5,7 +5,7 @@ from loguru import logger
 
 from handlers.msg_text import MAIN_MENU_TEXT
 from handlers.keyboards import kb_main
-from misc.scheduler_jobs import updateLastMsgTime
+from utils.misc import updateLastMsgTime
 
 
 async def send_mess_or_cb(msg=None, query=None,

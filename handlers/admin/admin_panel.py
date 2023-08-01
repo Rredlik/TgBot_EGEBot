@@ -1,9 +1,5 @@
 ### NOT WORKING ###
-from aiogram import Bot
-from aiogram.dispatcher import FSMContext
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
-
-from DB_update import update_full_description, get_full_description
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 #################################### STEP 1
