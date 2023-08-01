@@ -94,7 +94,7 @@ async def update_full_description(all_db=True, rest_id=None):
         try:
             if all_db:
                 values = await db.execute(
-                    """SELECT name FROM modules"""
+                    """SELECT name FROM storage_modules"""
                 )
                 restaurants = await values.fetchall()
             else:
@@ -108,7 +108,7 @@ async def update_full_description(all_db=True, rest_id=None):
                 d = await db.execute(
                     """SELECT name, description, address, addres_link, menu, average_check, 
                         kitchen, rest_type, view, phone_number 
-                        FROM modules WHERE name = :name""",
+                        FROM storage_modules WHERE name = :name""",
                     {'name': rest[0]}
                 )
                 name, description, address, address_link, menu, average_check, \
@@ -174,7 +174,7 @@ async def get_full_description(rest_id):
     async with connectToDB() as db:
         try:
             select_rest = await db.execute(
-                f"SELECT name, full_description, image FROM modules WHERE row_number() = (:rest_id)" ,
+                f"SELECT name, full_description, image FROM storage_modules WHERE row_number() = (:rest_id)" ,
                 {'rest_id': rest_id}
             )
             await db.commit()

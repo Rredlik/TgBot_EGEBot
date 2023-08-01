@@ -7,7 +7,7 @@ async def get_one(name):
     async with connectToDB() as db:
         try:
             command = await db.execute(
-                """SELECT * FROM 'modules' where name = :name""",
+                """SELECT * FROM 'storage_modules' where name = :name""",
                 {'name': name})
             modules = await command.fetchone()
             return modules
@@ -21,7 +21,7 @@ async def get_all():
     async with connectToDB() as db:
         try:
             command = await db.execute(
-                """SELECT * FROM 'modules'"""
+                """SELECT * FROM 'storage_modules'"""
             )
             modules = await command.fetchall()
             return modules
