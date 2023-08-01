@@ -1,18 +1,17 @@
-import logging
-
 from aiogram import Dispatcher, Bot
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.utils import executor
 from loguru import logger
 
 from config import ADMIN_IDS
-from config.env import Env
 from database.main import create_db
 from filters import register_all_filters
 from handlers.admin import register_admin_handlers
 from handlers.keyboards import kb_main
 from handlers.stuff_methods import _register_utils_handlers
 from handlers.user.main import register_users_handlers
+
+
 # from misc.scheduler_jobs import register_jobs
 
 
