@@ -7,6 +7,8 @@ async def create_db():
     async with connectToDB() as db:
 
         try:
+            dbs = db.execute("PRAGMA table_info(storage_users)").fetchall()
+            print(dbs)
             if len(db.execute("PRAGMA table_info(storage_users)").fetchall()) == 3:
                 print("DB was found(1/3)")
             else:
