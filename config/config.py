@@ -22,21 +22,3 @@ def set_datetime(record):
 def connectToDB():
     connection = aiosqlite.connect(PATH_DATABASE)
     return connection
-
-# async def async_gather_http_get():
-#     params = {
-#         "chat_id": CHAT_ID,
-#         "user_id": 5531606682
-#     }
-#     async with aiohttp.ClientSession() as session:
-#         async with session.post(f'https://api.telegram.org/{API_TOKEN}/getChatMember',
-#                                 data=params) as response:
-#             print("Status:", response.status)
-#             print("Content-type:", response.headers['content-type'])
-#
-#             html = await response.text()
-#             print("Body:", html, "...")
-
-#
-# if __name__ == '__main__':
-#     asyncio.run(async_gather_http_get())

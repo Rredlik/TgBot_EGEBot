@@ -1,6 +1,7 @@
 import asyncio
 
 from aiogram import Dispatcher
+from aiogram.dispatcher import FSMContext
 from aiogram.types import Message
 
 from database.methods.lesson_module import get_one
@@ -8,8 +9,9 @@ from filters.main import IsSubscriber
 from handlers.keyboards import kb_main
 
 
-async def __openModule(msg: Message):
+async def __openModule(msg: Message, state: FSMContext):
     name = msg.text
+    await state.reset_state()
     module_id, name, description, link = await get_one(name)
     # markup = InlineKeyboardMarkup().add(InlineKeyboardButton('Ссылка на курс', url=link))
     await msg.bot.send_message(chat_id=msg.from_user.id,

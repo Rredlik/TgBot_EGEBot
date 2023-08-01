@@ -43,7 +43,7 @@ async def is_registered(user_id):
     async with connectToDB() as db:
         try:
             command = await db.execute(
-                """SELECT * FROM 'users' WHERE user_id = :user_id""",
+                """SELECT * FROM 'storage_users' WHERE user_id = :user_id""",
                 {'user_id': user_id}
             )
             await db.commit()
@@ -64,7 +64,7 @@ async def create_new_user(user_id):
     async with connectToDB() as db:
         try:
             await db.execute(
-                "INSERT INTO 'users' (user_id, reg_date) VALUES (?, ?)",
+                "INSERT INTO 'storage_users' (user_id, reg_date) VALUES (?, ?)",
                 (user_id, datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
             )
             logger.info(f"New user registered: {user_id}")
