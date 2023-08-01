@@ -153,3 +153,5 @@ cython_debug/
 
 *.db
 logs
+*.DS_Store
+.gitattributes
