@@ -7,10 +7,12 @@ async def create_db():
     async with connectToDB() as db:
 
         try:
-            dbs = await db.execute("PRAGMA table_info(storage_users)")
-            dbs = await dbs.fetchall()
-            print(dbs)
-            if len(await (await db.execute("PRAGMA table_info(storage_users)").fetchall())) == 3:
+            storage_users = await (await db.execute("PRAGMA table_info(storage_users)")).fetchall()
+            storage_modules = await (await db.execute("PRAGMA table_info(storage_modules)")).fetchall()
+            storage_config = await (await db.execute("PRAGMA table_info(storage_config)")).fetchall()
+            # dbs = await dbs
+            # print(dbs)
+            if len(storage_users) == 3:
                 print("DB was found(1/3)")
             else:
                 await db.execute('create table storage_users('
@@ -19,7 +21,7 @@ async def create_db():
                                  'stage    INTEGER default 0 not null)')
                 print("DB was not found(1/3) | Creating...")
 
-            if len(await (await db.execute("PRAGMA table_info(storage_modules)").fetchall())) == 4:
+            if len(storage_modules) == 4:
                 print("DB was found(2/3)")
             else:
                 await db.execute('create table storage_modules('
@@ -29,7 +31,7 @@ async def create_db():
                                  'link        TEXT not null)')
                 print("DB was not found(2/3) | Creating...")
 
-            if len(await (await db.execute("PRAGMA table_info(storage_config)").fetchall())) == 2:
+            if len(storage_config) == 2:
                 print("DB was found(3/3)")
             else:
                 await db.execute('create table storage_config('
