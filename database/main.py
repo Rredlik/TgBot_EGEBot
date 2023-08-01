@@ -13,31 +13,34 @@ async def create_db():
             # dbs = await dbs
             # print(dbs)
             if len(storage_users) == 3:
-                print("DB was found(1/3)")
+                logger.success("DB was found (1/3)")
             else:
+                logger.warning("DB was not found (1/3) | Creating...")
                 await db.execute('create table storage_users('
                                  'user_id  TEXT not null primary key unique,'
                                  'reg_date INTEGER           not null,'
                                  'stage    INTEGER default 0 not null)')
-                print("DB was not found(1/3) | Creating...")
+                logger.success("DB was create (1/3)")
 
             if len(storage_modules) == 4:
-                print("DB was found(2/3)")
+                logger.success("DB was found (2/3)")
             else:
+                logger.warning("DB was not found (2/3) | Creating...")
                 await db.execute('create table storage_modules('
                                  'id          INTEGER not null primary key autoincrement unique,'
                                  ' name       TEXT,'
                                  'description TEXT,'
                                  'link        TEXT not null)')
-                print("DB was not found(2/3) | Creating...")
+                logger.success("DB was create (2/3)")
 
             if len(storage_config) == 2:
-                print("DB was found(3/3)")
+                logger.success("DB was found (3/3)")
             else:
+                logger.warning("DB was not found (3/3) | Creating...")
                 await db.execute('create table storage_config('
                                  'setting TEXT,'
                                  'value   TEXT)')
-                print("DB was not found(3/3) | Creating...")
+                logger.success("DB was create (3/3)")
 
         except Exception as er:
             logger.error(f"{er}")

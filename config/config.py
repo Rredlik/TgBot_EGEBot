@@ -16,7 +16,7 @@ VIDEO_INSTRUCTION_ID = 'BAACAgIAAxkBAAIPXWOrGRg67kqZ__kMkbFPaD2x0fPFAALbIQACW0tZ
 
 
 def set_datetime(record):
-    record['extra']['datetime'] = pendulum.now('Asia/Yekaterinburg').strftime('%d-%m-%Y %H:%M-%S')
+    record['extra']['datetime'] = pendulum.now('Asia/Yekaterinburg').strftime('%d-%m-%Y %H:%M:%S')
 
 
 def connectToDB():
