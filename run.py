@@ -1,3 +1,5 @@
+import asyncio
+
 from loguru import logger
 
 from config import set_datetime
@@ -15,5 +17,5 @@ def main():
 
 
 if __name__ == '__main__':
-    await create_db()
+    asyncio.run(await create_db())
     main()
