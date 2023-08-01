@@ -4,7 +4,6 @@ from aiogram.utils import executor
 from loguru import logger
 
 from config import ADMIN_IDS
-from database.main import create_db
 from filters import register_all_filters
 from handlers.admin import register_admin_handlers
 from handlers.keyboards import kb_main
