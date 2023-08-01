@@ -129,7 +129,6 @@ async def send_message(bot, user_id: int, text: str, disable_notification: bool 
     except Exception as er:
         logger.error(f"Target [ID:{user_id}]: {er}")
     else:
-        logger.info(f"Target [ID:{user_id}]: success")
         return True
     return False
 
