@@ -27,7 +27,7 @@ async def register_all_handlers(dp: Dispatcher) -> None:
 
 async def __on_start_up(dp: Dispatcher):
     # await register_database()
-    await create_db()
+
 
     await register_all_filters(dp)
     await register_all_handlers(dp)

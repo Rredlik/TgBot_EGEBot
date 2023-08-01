@@ -1,6 +1,9 @@
+import asyncio
+
 from loguru import logger
 
 from config import set_datetime
+from database.main import create_db
 from handlers.main import start_telegram_bot
 from misc.path import PathManager
 
@@ -15,4 +18,5 @@ def main():
 
 
 if __name__ == '__main__':
+    (asyncio.run(create_db()))
     main()
