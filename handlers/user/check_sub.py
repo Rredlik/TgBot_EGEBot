@@ -45,7 +45,8 @@ async def __sub_succeed(query: CallbackQuery, state: FSMContext):
                    '🚀 Не теряй времени - давай продолжим это увлекательное путешествие '
                    'в мир Python вместе!')
         await query.bot.send_message(user_id,
-                                     msgText)
+                                     msgText,
+                                     reply_markup=await kb_main())
         await __mainMenu(query, state)
 
 
