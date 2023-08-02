@@ -5,7 +5,6 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from config import CHANNEL_LINK
 from database.methods import user_stage
 from filters.main import IsSubscriber
 from handlers.keyboards import kb_main
