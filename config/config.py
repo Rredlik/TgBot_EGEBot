@@ -3,7 +3,7 @@ import aiosqlite
 import pendulum as pendulum
 
 
-PATH_DATABASE = "database/main.db"
+
 
 
 ADMIN_IDS = [351931465]  # 351931465
@@ -19,6 +19,7 @@ def set_datetime(record):
     record['extra']['datetime'] = pendulum.now('Asia/Yekaterinburg').strftime('%d-%m-%Y %H:%M:%S')
 
 
+PATH_DATABASE = "database/main.db"
 def connectToDB():
     connection = aiosqlite.connect(PATH_DATABASE)
     return connection
