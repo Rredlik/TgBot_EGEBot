@@ -12,15 +12,20 @@ from handlers.keyboards import kb_main
 async def __openModule(msg: Message, state: FSMContext):
     name = msg.text
     await state.reset_state()
-    module_id, name, description, link = await get_one(name)
-    # markup = InlineKeyboardMarkup().add(InlineKeyboardButton('Ссылка на курс', url=link))
-    await msg.bot.send_message(chat_id=msg.from_user.id,
-                               text=f'{description}\n\n',
-                               reply_markup=await kb_main())
-    await asyncio.sleep(0.2)
-    await msg.bot.send_message(chat_id=msg.from_user.id,
-                               text=f'{link}',
-                               reply_markup=await kb_main())
+    try:
+        module_id, name, description, link = await get_one(name)
+        # markup = InlineKeyboardMarkup().add(InlineKeyboardButton('Ссылка на курс', url=link))
+        await msg.bot.send_message(chat_id=msg.from_user.id,
+                                   text=f'{description}\n\n',
+                                   reply_markup=await kb_main())
+        await asyncio.sleep(0.2)
+        await msg.bot.send_message(chat_id=msg.from_user.id,
+                                   text=f'{link}',
+                                   reply_markup=await kb_main())
+    except Exception as er:
+        await msg.bot.send_message(chat_id=msg.from_user.id,
+                                   text=f'Выбирай модуль кнопками внизу, пожалуйста',
+                                   reply_markup=await kb_main())
 
 
 def register_openModule_handlers(dp: Dispatcher) -> None:
