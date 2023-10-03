@@ -22,7 +22,7 @@ async def __openModule(msg: Message, state: FSMContext):
         await msg.bot.send_message(chat_id=msg.from_user.id,
                                    text=f'{link}',
                                    reply_markup=await kb_main())
-    except Exception as er:
+    except Exception:
         await msg.bot.send_message(chat_id=msg.from_user.id,
                                    text=f'Выбирай модуль кнопками внизу, пожалуйста',
                                    reply_markup=await kb_main())
